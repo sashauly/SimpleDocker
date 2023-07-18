@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  main-server:
+    image: main-server:v1
+    build: ./5part/.
+    volumes:
+      - ./5part/nginx:/etc/nginx
+  proxy-nginx:
+    image: nginx:latest
+    ports:
+      - 80:8080
+    volumes:
+      - ./nginx:/etc/nginx
+    depends_on:
+      - main-server
